@@ -1,156 +1,70 @@
-# Server Health Monitoring - Frontend
+# Getting Started with Create React App
 
-This is the frontend for the **Server Health Monitoring** application, developed using **React**. The frontend connects to the **Spring Boot** backend to fetch the server health status and display it to the user.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features
+## Available Scripts
 
-- Display the server health status in real-time.
-- Connect to the Spring Boot backend to retrieve the health status through the `/actuator/health` endpoint.
-- Error handling when the server health status cannot be retrieved.
+In the project directory, you can run:
 
-## Technologies
+### `npm start`
 
-- **React**: for building the user interface.
-- **Axios**: for making HTTP requests to the backend.
-- **CSS**: for basic styling.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Requirements
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- Node.js (version 12 or higher)
-- npm (Node Package Manager)
+### `npm test`
 
-## Installation
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. **Clone the frontend repository**:
+### `npm run build`
 
-   ```bash
-   git clone https://github.com/your-username/server-health-monitoring-frontend.git
-   cd server-health-monitoring-frontend
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    Install the dependencies:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-npm install
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Run the application:
+### `npm run eject`
 
-    npm start
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-    The React application will be available at http://localhost:3000 and will connect to the Spring Boot backend at http://localhost:8080 (ensure the backend is running).
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Configuration
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-The frontend connects to the backend at http://localhost:8080/actuator/health to fetch the server health status. If your backend is running on a different port, be sure to update the URL in the HealthStatus component located at src/components/HealthStatus.js.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-axios.get('http://localhost:8080/actuator/health')
+## Learn More
 
-Testing
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-You can test the application by following these steps:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-    Start the Spring Boot backend (ensure it's running at http://localhost:8080).
-    Start the React frontend using npm start.
-    Go to http://localhost:3000 in your browser to view the server health status.
+### Code Splitting
 
-Contributing
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-If you'd like to contribute to the project, feel free to open a pull request. Any improvements, bug fixes, or new features are appreciated.
-License
+### Analyzing the Bundle Size
 
-Distributed under the MIT License. See the LICENSE file for more details.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
+### Making a Progressive Web App
 
-### Project Structure
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-Your React project structure should look like this:
+### Advanced Configuration
 
-server-health-monitoring-frontend/ ├── public/ ├── src/ │ ├── components/ │ │ └── HealthStatus.js │ ├── App.js │ ├── index.js ├── package.json └── README.md
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
+### Deployment
 
-### Creating React Components
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-#### 1. **HealthStatus Component**
+### `npm run build` fails to minify
 
-Create a new component `HealthStatus.js` inside `src/components/` to fetch and display the server's health status.
-
-```javascript
-// src/components/HealthStatus.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const HealthStatus = () => {
-  const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    // Fetch the health status from the backend
-    axios.get('http://localhost:8080/actuator/health')
-      .then((response) => {
-        if (response.data.status === 'UP') {
-          setStatus('Server is UP and running!');
-        } else {
-          setStatus('Server is DOWN!');
-        }
-      })
-      .catch((err) => {
-        setError('Error retrieving health status');
-        console.error(err);
-      });
-  }, []);
-
-  return (
-    <div className="health-status">
-      <h2>Server Health Status</h2>
-      {error && <p>{error}</p>}
-      {status && <p>{status}</p>}
-    </div>
-  );
-};
-
-export default HealthStatus;
-
-2. Modify App.js to include HealthStatus
-
-Update the App.js file to render the HealthStatus component:
-
-// src/App.js
-import React from 'react';
-import './App.css';
-import HealthStatus from './components/HealthStatus';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Server Health Monitoring</h1>
-      </header>
-      <main>
-        <HealthStatus />
-      </main>
-    </div>
-  );
-}
-
-export default App;
-
-Running the Frontend
-
-    Install dependencies:
-
-    After cloning the repository and navigating into the project directory, run:
-
-npm install
-
-Start the application:
-
-To run the React frontend:
-
-    npm start
-
-This will start the React app on http://localhost:3000, and it will connect to the Spring Boot backend at http://localhost:8080.
-Additional Features and Future Enhancements
-
-The frontend can be extended to include the following features:
-
-    Real-time graphs: Monitor CPU, memory, and system load.
-    Authentication: Add authentication and authorization for secure access to the health endpoints.
-    Error notifications: Notify users in case of server downtime or other issues.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
